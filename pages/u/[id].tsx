@@ -22,6 +22,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 					id: true,
 					url: true,
 				},
+				orderBy: {
+					createdAt: 'desc',
+				},
 			},
 		},
 	});

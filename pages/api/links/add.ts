@@ -11,7 +11,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			url,
 			userEmail: email,
 		},
+		select: {
+			user: {
+				select: {
+					id: true,
+				},
+			},
+		},
 	});
 
-	res.status(200).json({ postId: post.id });
+	await res.unstable_revalidate(`/u/${post.user.id}`);
+	res.status(200).json({ status: 'Success' });
 }
