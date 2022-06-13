@@ -3,13 +3,7 @@ import { useEffect, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from '../components/NextImage';
 import PostCard from '../components/PostCard';
-
-type Post = {
-	id: string;
-	userEmail: string;
-	url: string;
-	createdAt: Date;
-};
+import { Post } from '@prisma/client';
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
