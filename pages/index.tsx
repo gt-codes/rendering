@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
+import NextImage from '../components/NextImage';
 
 const Home: NextPage = () => {
 	const { data } = useSession();
@@ -40,6 +41,16 @@ const Home: NextPage = () => {
 						</>
 					)}
 				</div>
+			</div>
+			<div className='grow grid grid-cols-2 md:grid-cols-4 gap-1'>
+				{Array.from({ length: 20 }).map((_, i) => (
+					<div className='relative h-64' key={i}>
+						<NextImage
+							layout='fill'
+							src='https://images.unsplash.com/photo-1654795012821-c3c1a6a573cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
+						/>
+					</div>
+				))}
 			</div>
 		</div>
 	);
