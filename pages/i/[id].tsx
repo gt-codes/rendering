@@ -42,8 +42,8 @@ type PostWithUser = Post & {
 
 export default function ImagePage({ post }: { post: PostWithUser }) {
 	return (
-		<div className='relative h-screen w-screen flex justify-center items-center p-64'>
-			<div className='m-64 flex relative h-full w-full flex-col space-y-4'>
+		<div className='relative h-screen w-screen flex justify-center items-center px-64 py-12'>
+			<div className='flex relative h-full w-full flex-col space-y-4'>
 				<NextLink href='/' className='text-white w-max bg-black px-4 text-sm py-2 rounded-md'>
 					All Posts
 				</NextLink>
@@ -58,8 +58,8 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 						</span>
 					</p>
 				</div>
-				<div className='relative h-full'>
-					<NextImage layout='fill' src={post.url} />
+				<div className='relative h-full w-full'>
+					<NextImage layout='fill' objectFit='contain' src={post.url} />
 				</div>
 			</div>
 		</div>

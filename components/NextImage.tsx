@@ -7,15 +7,15 @@ export default function NextImage(props: ImageProps) {
 
 	return (
 		<Image
-			{...props}
 			alt={props.alt || 'Image'}
+			objectFit='cover'
+			onLoadingComplete={() => setLoading(false)}
+			{...props}
 			className={classNames(
 				'duration-300 ease-in-out',
 				loading ? 'blur-2xl scale-110' : 'blur-0 scale-100',
 				props.className || ''
 			)}
-			objectFit='cover'
-			onLoadingComplete={() => setLoading(false)}
 		/>
 	);
 }
