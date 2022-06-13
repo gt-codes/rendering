@@ -24,8 +24,6 @@ const Home: NextPage = () => {
 		setUrl('');
 	};
 
-	console.log({ posts });
-
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
