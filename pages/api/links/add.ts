@@ -21,5 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	});
 
 	await res.unstable_revalidate(`/u/${post.user.id}`);
+	console.log(`revalidated /u/${post.user.id}`);
 	res.status(200).json({ status: 'Success' });
 }
