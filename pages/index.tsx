@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 			},
 			body: JSON.stringify({ url, email: session?.user?.email }),
 		});
-		const data = await res.json();
+		await res.json();
 		setUrl('');
 	};
 
@@ -67,6 +67,7 @@ const Home: NextPage = () => {
 										type='email'
 										name='email'
 										id='email'
+										value={url}
 										onChange={(e) => setUrl(e.target.value)}
 										onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
 										className='border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-3 sm:text-sm'
@@ -88,7 +89,7 @@ const Home: NextPage = () => {
 				{loading ? (
 					<p>Loading...</p>
 				) : (
-					<div className='grid grid-cols-2 md:grid-cols-4 gap-1'>
+					<div className='grid grid-cols-2 md:grid-cols-4'>
 						{posts.map((el: Post) => (
 							<PostCard key={el.id} post={el} />
 						))}
