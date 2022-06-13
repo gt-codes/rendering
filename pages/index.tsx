@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from '../components/NextImage';
 
 const Home: NextPage = () => {
@@ -18,7 +18,12 @@ const Home: NextPage = () => {
 							Signin with Github
 						</button>
 					) : (
-						<>
+						<div className='flex items-center space-x-2'>
+							<div
+								className='relative h-8 w-8 overflow-hidden cursor-pointer rounded-full'
+								onClick={() => signOut()}>
+								<NextImage src={data.user?.image as string} alt='avi' layout='fill' />
+							</div>
 							<label htmlFor='unsplashUrl' className='sr-only'>
 								Enter Unsplash link
 							</label>
@@ -38,7 +43,7 @@ const Home: NextPage = () => {
 									Add
 								</button>
 							</div>
-						</>
+						</div>
 					)}
 				</div>
 			</div>
