@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 	const [posts, setPosts] = useState<Post[]>([]);
 
 	const handleAdd = async () => {
-		if (!url || url.startsWith('https://unsplash.com/photos')) return;
+		if (!url.startsWith('https://images.unsplash.com')) return;
 		const res = await fetch('/api/links/add', {
 			method: 'POST',
 			headers: {
