@@ -1,11 +1,21 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from '../components/NextImage';
+import PostCard from '../components/PostCard';
+
+type Post = {
+	id: string;
+	userEmail: string;
+	url: string;
+	createdAt: Date;
+};
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
 	const [url, setUrl] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [posts, setPosts] = useState<Post[]>([]);
 
 	const handleAdd = async () => {
 		if (!url) return;
@@ -19,6 +29,19 @@ const Home: NextPage = () => {
 		const data = await res.json();
 		setUrl('');
 	};
+
+	console.log({ posts });
+
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true);
+			const res = await fetch('/api/links/getAll');
+			const data = await res.json();
+			setPosts(data);
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<div className='w-screen h-screen flex flex-col relative'>
@@ -61,15 +84,16 @@ const Home: NextPage = () => {
 					)}
 				</div>
 			</div>
-			<div className='grow grid grid-cols-2 md:grid-cols-4 gap-1'>
-				{Array.from({ length: 20 }).map((_, i) => (
-					<div className='relative h-64' key={i}>
-						<NextImage
-							layout='fill'
-							src='https://images.unsplash.com/photo-1654795012821-c3c1a6a573cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
-						/>
+			<div className='grow'>
+				{loading ? (
+					<p>Loading...</p>
+				) : (
+					<div className='grid grid-cols-2 md:grid-cols-4 gap-1'>
+						{posts.map((el: Post) => (
+							<PostCard key={el.id} post={el} />
+						))}
 					</div>
-				))}
+				)}
 			</div>
 		</div>
 	);
