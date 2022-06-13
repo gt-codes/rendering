@@ -2,6 +2,7 @@ import { Post, PrismaClient } from '@prisma/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import NextImage from '../../components/NextImage';
+import NextLink from '../../components/NextLink';
 
 const prisma = new PrismaClient();
 
@@ -20,6 +21,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			url: true,
 			user: {
 				select: {
+					id: true,
 					image: true,
 					name: true,
 				},
@@ -32,6 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 type PostWithUser = Post & {
 	user: {
+		id: string;
 		name: string;
 		image: string;
 	};
@@ -41,15 +44,18 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 	return (
 		<div className='relative h-screen w-screen flex justify-center items-center p-64'>
 			<div className='m-64 flex relative h-full w-full flex-col space-y-4'>
-				<Link className='' href='/'>
+				<NextLink href='/' className='text-white w-max bg-black px-4 text-sm py-2 rounded-md'>
 					All Posts
-				</Link>
+				</NextLink>
 				<div className='flex items-center space-x-2'>
 					<div className='relative h-8 w-8 overflow-hidden z-20 cursor-pointer rounded-full'>
 						<NextImage src={post.user.image} alt='avi' layout='fill' />
 					</div>
 					<p className='text-gray-700'>
-						Posted by <span className='font-bold'>{post.user.name}</span>
+						Posted by{' '}
+						<span className='font-bold cursor-pointer'>
+							<Link href={`/u/${post.user.id}`}>{post.user.name}</Link>
+						</span>
 					</p>
 				</div>
 				<div className='relative h-full'>
