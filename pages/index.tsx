@@ -4,15 +4,18 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from '../components/NextImage';
 import PostCard from '../components/PostCard';
 import { Post } from '@prisma/client';
+import Spinner from '../components/Spinner';
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
 	const [url, setUrl] = useState('');
-	const [loading, setLoading] = useState(false);
+	const [loadingFetch, setLoadingFetch] = useState(false);
+	const [loadingAdd, setLoadingAdd] = useState(false);
 	const [posts, setPosts] = useState<Post[]>([]);
 
 	const handleAdd = async () => {
 		if (!url.startsWith('https://images.unsplash.com')) return;
+		setLoadingAdd(true);
 		const res = await fetch('/api/links/add', {
 			method: 'POST',
 			headers: {
@@ -21,16 +24,17 @@ const Home: NextPage = () => {
 			body: JSON.stringify({ url, email: session?.user?.email }),
 		});
 		await res.json();
+		setLoadingAdd(false);
 		setUrl('');
 	};
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setLoading(true);
+			setLoadingFetch(true);
 			const res = await fetch('/api/links/getAll');
 			const data = await res.json();
 			setPosts(data);
-			setLoading(false);
+			setLoadingFetch(false);
 		};
 		fetchData();
 	}, []);
@@ -68,9 +72,10 @@ const Home: NextPage = () => {
 								</div>
 								<button
 									type='button'
+									disabled={loadingAdd}
 									onClick={handleAdd}
 									className='-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'>
-									Add
+									{loadingAdd ? <Spinner /> : 'Add'}
 								</button>
 							</div>
 						</div>
@@ -78,7 +83,7 @@ const Home: NextPage = () => {
 				</div>
 			</div>
 			<div className='grow'>
-				{loading ? (
+				{loadingFetch ? (
 					<p>Loading...</p>
 				) : (
 					<div className='grid grid-cols-2 md:grid-cols-4'>
