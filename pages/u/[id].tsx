@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		},
 	});
 
-	return { props: { user } };
+	return { props: { user, key: user?.id } };
 };
 
 type UserWithPosts = User & {
