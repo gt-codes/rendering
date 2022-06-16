@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import NextImage from '../../components/NextImage';
 import NextLink from '../../components/NextLink';
+import ImagePageSkeleton from '../../components/Skeletons/ImagePageSkeleton';
 
 const prisma = new PrismaClient();
 
@@ -12,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = posts.map((post) => ({
 		params: { id: post.id },
 	}));
-	return { paths, fallback: false };
+	return { paths, fallback: true };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const post = await prisma.post.findUnique({
@@ -45,7 +46,7 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 	const router = useRouter();
 
 	if (router.isFallback) {
-		return <div className='w-screen h-screen flex flex-col relative'>Loading...</div>;
+		return <ImagePageSkeleton />;
 	}
 
 	return (
