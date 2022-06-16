@@ -1522,7 +1522,7 @@ next-auth@^4.5.0:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
-next@12.1.6@canary:
+next@12.1.7-canary.40:
   version "12.1.7-canary.40"
   resolved "https://registry.yarnpkg.com/next/-/next-12.1.7-canary.40.tgz#b727653b33baf1891e6f12fbada5b8b1c702b5b6"
   integrity sha512-7j1RzMh1D4KERrI+l9kPnrYQvObRqWSdJsWQi7HRs+spRPHTJxxR9uOXnmx9lJr8VwGspPqRS2ykxUfS/1RMcw==
