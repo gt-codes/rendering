@@ -31,9 +31,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		},
 	});
 
-	
 	if (!user) {
-		return { notFound: true };
+		return {
+			notFound: true,
+			revalidate: 10,
+		};
 	}
 
 	return { props: { user } };
