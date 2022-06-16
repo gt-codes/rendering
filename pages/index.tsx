@@ -74,7 +74,7 @@ const Home: NextPage = () => {
 									type='button'
 									disabled={loadingAdd}
 									onClick={handleAdd}
-									className='-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'>
+									className='-ml-px min-w-16 min-h-[38px] relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'>
 									{loadingAdd ? <Spinner /> : 'Add'}
 								</button>
 							</div>
