@@ -1,8 +1,10 @@
 import { PrismaClient, User } from '@prisma/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import NextImage from '../../components/NextImage';
 import NextLink from '../../components/NextLink';
 import PostCard from '../../components/PostCard';
+import UserSkeleton from '../../components/Skeletons/UserSkeleton';
 
 const prisma = new PrismaClient();
 
@@ -11,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = users.map((user) => ({
 		params: { id: user.id },
 	}));
-	return { paths, fallback: false };
+	return { paths, fallback: true };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const user = await prisma.user.findUnique({
@@ -29,7 +31,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		},
 	});
 
-	return { props: { user, key: user?.id } };
+	
+	if (!user) {
+		return { notFound: true };
+	}
+
+	return { props: { user } };
 };
 
 type UserWithPosts = User & {
@@ -39,7 +46,13 @@ type UserWithPosts = User & {
 	}[];
 };
 
-export default function ImagePage({ user }: { user: UserWithPosts }) {
+export default function UserPage({ user }: { user: UserWithPosts }) {
+	const router = useRouter();
+
+	if (router.isFallback) {
+		return <UserSkeleton />;
+	}
+
 	return (
 		<div className='w-screen h-screen flex flex-col relative'>
 			<div className='p-16 px-6 md:p-16 flex justify-center items-center z-20 bg-white/25 backdrop-blur-md sticky top-0'>

@@ -1,6 +1,7 @@
 import { Post, PrismaClient } from '@prisma/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import NextImage from '../../components/NextImage';
 import NextLink from '../../components/NextLink';
 
@@ -41,6 +42,12 @@ type PostWithUser = Post & {
 };
 
 export default function ImagePage({ post }: { post: PostWithUser }) {
+	const router = useRouter();
+
+	if (router.isFallback) {
+		return <div className='w-screen h-screen flex flex-col relative'>Loading...</div>;
+	}
+
 	return (
 		<div className='relative h-screen w-screen flex justify-center items-center px-64 py-12'>
 			<div className='flex relative h-full w-full flex-col space-y-4'>
