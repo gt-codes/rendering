@@ -50,7 +50,7 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 	}
 
 	return (
-		<div className='relative h-screen w-screen flex justify-center items-center px-64 py-12'>
+		<div className='relative h-screen w-screen flex justify-center items-center px-6 md:px-64 py-12'>
 			<div className='flex relative h-full w-full flex-col space-y-4'>
 				<NextLink href='/' className='text-white w-max bg-black px-4 text-sm py-2 rounded-md'>
 					All Posts
