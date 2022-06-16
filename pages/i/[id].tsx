@@ -31,6 +31,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		},
 	});
 
+	if (!post) {
+		return {
+			notFound: true,
+			revalidate: 10,
+		};
+	}
+
 	return { props: { post } };
 };
 
