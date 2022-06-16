@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import NextImage from '../../components/NextImage';
 import NextLink from '../../components/NextLink';
 import PostCard from '../../components/PostCard';
-import UserSkeleton from '../../components/Skeletons/UserSkeleton';
+import UserPageSkeleton from '../../components/Skeletons/UserPageSkeleton';
 
 const prisma = new PrismaClient();
 
@@ -52,7 +52,7 @@ export default function UserPage({ user }: { user: UserWithPosts }) {
 	const router = useRouter();
 
 	if (router.isFallback) {
-		return <UserSkeleton />;
+		return <UserPageSkeleton />;
 	}
 
 	return (
