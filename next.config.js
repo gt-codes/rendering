@@ -10,6 +10,10 @@ const nextConfig = {
 				source: '/script.js',
 				destination: 'https://umami-production-2a81.up.railway.app/umami.js',
 			},
+			{
+				source: '/api/collect',
+				destination: 'https://umami-production-2a81.up.railway.app/api/collect',
+			},
 		];
 	},
 };
