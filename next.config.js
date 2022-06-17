@@ -16,11 +16,11 @@ const nextConfig = {
 		return [
 			{
 				source: '/script.js',
-				destination: 'https://umami-production-2a81.up.railway.app/umami.js',
+				destination: 'https://garrett.up.railway.app/umami.js',
 			},
 			{
 				source: '/api/collect',
-				destination: 'https://umami-production-2a81.up.railway.app/api/collect',
+				destination: 'https://garrett.up.railway.app/api/collect',
 			},
 		];
 	},
