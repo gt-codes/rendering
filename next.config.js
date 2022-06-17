@@ -4,6 +4,13 @@ const nextConfig = {
 	images: {
 		domains: ['images.unsplash.com', 'avatars.githubusercontent.com'],
 	},
+	webpack: (config, { webpack, buildId }) => {
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				'process.env.BUILD_ID': JSON.stringify(buildId),
+			})
+		);
+	},
 	async rewrites() {
 		return [
 			{

@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		},
 	});
 
-	await Promise.all([
+	await Promise.allSettled([
 		res.unstable_revalidate(`/u/${post.user.id}`),
 		res.unstable_revalidate(`/_next/data/${process.env.BUILD_ID}/u/${post.user.id}.json`),
 		res.unstable_revalidate(`/_next/data/${process.env.BUILD_ID}/u/${post.user.id}.json?id=${post.user.id}`),
