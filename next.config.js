@@ -10,6 +10,7 @@ const nextConfig = {
 				'process.env.BUILD_ID': JSON.stringify(buildId),
 			})
 		);
+		return config;
 	},
 	async rewrites() {
 		return [
