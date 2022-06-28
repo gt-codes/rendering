@@ -4,6 +4,11 @@ const nextConfig = {
 	images: {
 		domains: ['images.unsplash.com', 'avatars.githubusercontent.com'],
 	},
+	experimental: {
+		images: {
+			allowFutureImage: true,
+		},
+	},
 	webpack: (config, { webpack, buildId }) => {
 		config.plugins.push(
 			new webpack.DefinePlugin({
