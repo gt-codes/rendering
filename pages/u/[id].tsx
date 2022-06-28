@@ -61,7 +61,7 @@ export default function UserPage({ user }: { user: UserWithPosts }) {
 				<div className='w-full md:w-1/2 flex justify-center '>
 					<div className='flex items-center space-x-2'>
 						<div className='relative h-8 w-8 overflow-hidden z-20 cursor-pointer rounded-full'>
-							<NextImage src={user.image as string} alt='avi' layout='fill' />
+							<NextImage src={user.image as string} alt='avi' />
 						</div>
 						<p className='text-white bg-black px-4 text-sm py-2 rounded-md'>
 							Posted by{' '}

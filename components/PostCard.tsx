@@ -12,7 +12,7 @@ export default function PostCard({ post }: { post: Post | ShortPost }) {
 	return (
 		<Link href={`/i/${post.id}`}>
 			<a className='relative h-96 w-full' key={post.id}>
-				<NextImage layout='fill' src={post.url} />
+				<NextImage src={post.url} className='w-full h-full' />
 			</a>
 		</Link>
 	);

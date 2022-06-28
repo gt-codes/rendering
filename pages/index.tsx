@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 							<div
 								className='relative h-8 w-8 overflow-hidden cursor-pointer rounded-full'
 								onClick={() => signOut()}>
-								<NextImage src={session.user?.image as string} alt='avi' layout='fill' />
+								<NextImage src={session.user?.image as string} alt='avi' className='w-full h-full' />
 							</div>
 							<label htmlFor='unsplashUrl' className='sr-only'>
 								Enter Unsplash link

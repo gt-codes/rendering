@@ -64,7 +64,7 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 				</NextLink>
 				<div className='flex items-center space-x-2'>
 					<div className='relative h-8 w-8 overflow-hidden z-20 cursor-pointer rounded-full'>
-						<NextImage src={post.user.image} alt='avi' layout='fill' />
+						<NextImage src={post.user.image} alt='avi' />
 					</div>
 					<p className='text-gray-700'>
 						Posted by{' '}
@@ -73,8 +73,8 @@ export default function ImagePage({ post }: { post: PostWithUser }) {
 						</span>
 					</p>
 				</div>
-				<div className='relative h-full w-full'>
-					<NextImage layout='fill' objectFit='contain' src={post.url} />
+				<div className='relative h-full w-full flex justify-center'>
+					<NextImage className='object-cover' src={post.url} />
 				</div>
 			</div>
 		</div>
